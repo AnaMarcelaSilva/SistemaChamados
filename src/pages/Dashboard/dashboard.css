@@ -1,0 +1,258 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashboard span {
+  margin: 2em 0;
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+.new {
+  float: right;
+  margin-bottom: 1.5em;
+  background-color: #83bf02;
+  color: white;
+  border: 0;
+  padding: .5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1em;
+  border-radius: 6px;
+}
+
+.new svg {
+  margin-right: 5px;
+}
+
+.new:hover {
+  background-color: #98d810;
+  transform: scale(1.1);
+}
+
+table {
+  border: 1px solid #CCC;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: .5em;
+  margin: .5em 0.75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+  font-size: 1.1em;
+}
+
+table th,
+table td {
+  text-align: center;
+  padding: .62em;
+}
+
+table th {
+  text-transform: uppercase;
+}
+
+table td .action {
+  border: 0;
+  border-radius: 4px;
+  padding: 6px;
+  margin-right: 2px;
+  align-items: center;
+  display: inline-block;
+}
+
+table td .action {
+  align-items: center;
+  justify-content: center;
+}
+
+table td .badge {
+  padding: 3px;
+  border-radius: 3px;
+  color: #FFF;
+}
+
+.btn-more {
+  margin: 1.5em 0;
+  padding: .5em 1em;
+  height: 35px;
+  border: 0;
+  border-radius: 5px;
+  background-color: #181c2e;
+  color: #FFF;
+  font-size: 1.1em;
+}
+
+.email {
+  display: none;
+}
+
+@media screen and (max-width: 850px) {
+  table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+    font-size: 1em;
+  }
+
+
+  .requerente {
+    display: none;
+  }
+
+  table td .action {
+    margin-left: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 5px;
+  }
+
+  .btn-action {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dashboard span {
+    margin: 2em 0;
+    font-weight: 600;
+    font-size: 1.2em;
+  }
+
+  .new {
+    float: right;
+    margin-bottom: 1.5em;
+    background-color: #83bf02;
+    color: white;
+    border: 0;
+    padding: .5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1em;
+    border-radius: 6px;
+  }
+
+  .new svg {
+    margin-right: 5px;
+  }
+
+  .new:hover {
+    background-color: #98d810;
+    transform: scale(1.1);
+  }
+
+  table {
+    border: 1px solid #CCC;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  table caption {
+    font-size: .5em;
+    margin: .5em 0.75em;
+  }
+
+  table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+    font-size: 1.1em;
+  }
+
+  table th,
+  table td {
+    text-align: center;
+    padding: .62em;
+  }
+
+  table th {
+    text-transform: uppercase;
+  }
+
+  table td .action {
+    border: 0;
+    border-radius: 4px;
+    padding: 6px;
+    margin-right: 2px;
+    align-items: center;
+    display: inline-block;
+  }
+
+  table td .action {
+    align-items: center;
+    justify-content: center;
+  }
+
+  table td .badge {
+    padding: 3px;
+    border-radius: 3px;
+    color: #FFF;
+  }
+
+  .btn-more {
+    margin: 1.5em 0;
+    padding: .5em 1em;
+    height: 35px;
+    border: 0;
+    border-radius: 5px;
+    background-color: #181c2e;
+    color: #FFF;
+    font-size: 1.1em;
+  }
+
+  .email {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 850px) {
+  table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+    font-size: 1em;
+  }
+
+
+  .requerente {
+    display: none;
+  }
+
+  table td .action {
+    margin-left: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 3px 5px;
+  }
+
+  .btn-action {
+    align-items: center;
+    justify-content: center;
+  }
+}
