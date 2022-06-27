@@ -8,8 +8,13 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/auth';
 import firebase from '../../services/firebaseConnection';
 import { useHistory, useParams } from 'react-router-dom';
+import Dashboard from '../Dashboard';
+import Modal from '../../components/Modal';
+
 
 import './new.css';
+
+var NomeRequerente;
 
 export default function New(){
   const {id} = useParams(); //buscar dados na url que correspodem a id
@@ -23,13 +28,18 @@ export default function New(){
   const [assunto, setAssunto] = useState("Suporte");
   const [status, setStatus] = useState("Aberto");
   const [descricao, setDescricao] = useState('');
-  const [codigo, setCodigo] = useState(0);
   const [edit, setEdit] = useState(false);
+  const [codigo, setCodigo] = useState(0);
+  const [solucao, setSolucao] = useState('');
+  const [responsavel, setResponsavel] = useState('');
+  const [dataFinal, setDataFinal] = useState();
 
+
+  var valueTextarea = window.document.getElementById('MeuId');
 
   useEffect(()=>{
     loadId();
-    setEdit(true);
+    NomeRequerente = nome;
       
   }, [id])
 
@@ -40,9 +50,10 @@ export default function New(){
     setAssunto(snapshot.data().assunto);
     setStatus(snapshot.data().status);
     setDescricao(snapshot.data().descricao);
-    setCodigo(snapshot.data().codigo);
+    setSolucao(snapshot.data().solucao);
     setNome(snapshot.data().nome);
     SetEmail(snapshot.data().email);
+    setResponsavel(snapshot.data().responsavel)
 
     setEdit(true)
   })
@@ -53,37 +64,36 @@ export default function New(){
 
   async function Register(e){
     e.preventDefault();
-/*  let gerarNum = codigo;
-      gerarNum++;
-      while(gerarNum <= codigo){
-        gerarNum++;
-        setCodigo(gerarNum);
-      }
-      setCodigo(gerarNum);
-      console.log(codigo); */
 
       if(edit){
         await firebase.firestore().collection('chamados')
         .doc(id)
         .update({
-          requerente: nome,
+          requerente: NomeRequerente,
           email: email,
           assunto: assunto,
           status: status,
           descricao: descricao,
           rm: rm,
-          codigo: codigo
+          codigo: codigo,
+          solucao: solucao,
+          responsavel: responsavel,
+          dataFinal: new Date()
         })
         .then(()=>{
           toast.success('Chamados editado com sucesso!');
-          history.push('/dashboard')
-          setDescricao("");
+          history.push('/dashboard');
+
+
+          
         })
         .catch((error)=>{
           console.log(error);
           toast.error("Falha ao editar chamado, tente mais tarde!")
         })
         return;
+      }else{
+        
       }
 
     await firebase.firestore().collection("chamados")
@@ -95,28 +105,35 @@ export default function New(){
       status: status,
       descricao: descricao,
       rm: rm,
-      codigo: codigo
+      codigo: codigo,
+      solucao: solucao,
+      responsavel: responsavel,
+      dataFinal: new Date()
     }) 
     .then(()=>{
       toast.success("Chamado registrado com sucesso!");
       setDescricao("");
+      history.push('/dashboard')
+      
     })
-    .catch((error)=>{
-      toast.error("Algo deu errado ao registrar, tente novamente.")
-      console.log(error);
-    })
+
   }
 
   //A função é chamada quando é selecionado o assunto
   function ChangeSelect(e){
     setAssunto(e.target.value);
-    console.log(e.target.value)
   }
   
   //A função é chamada quando o status é selecionado
   function ChangeOption(e){
     setStatus(e.target.value);
-    console.log(e.target.value);
+  }
+
+  function resposavelSolucao(e){
+    setSolucao(e.target.value);
+    setResponsavel(user && user.nome);
+
+    setDataFinal(new Date())
   }
 
   return(
@@ -144,6 +161,7 @@ export default function New(){
 
             <label>Status</label>
             <div className='status'>
+            <div>
               <input 
               type='radio'
               name='radio'
@@ -152,7 +170,9 @@ export default function New(){
               checked={status === 'Aberto' ? true : false}
               />
               <span>Em Aberto</span>
+              </div>
 
+              <div className='status-input'>
               <input 
               type='radio'
               name='radio'
@@ -161,7 +181,9 @@ export default function New(){
               checked={status === 'Progesso' ? true : false}
               />
               <span>Em progresso</span>
+              </div>
 
+              <div className='status-input'>
               <input 
               type='radio'
               name='radio'
@@ -170,16 +192,31 @@ export default function New(){
               checked={status === 'Atendido' ? true : false}
               />
               <span>Atendido</span>
+              </div>
             </div>
+            
 
             <label>Descrição</label>
-            <textarea required placeholder='Descreva seu problema aqui.' value={descricao} onChange={(e) => setDescricao(e.target.value)}/>
+            <textarea id='MeuId' required placeholder='Descreva seu problema aqui.' value={descricao} onChange={(e) => setDescricao(e.target.value)}/>
+            <>
+            {status == 'Atendido' && id &&
+             <h3>Solução</h3> &&
+              <textarea required placeholder='Descreva quais medidas foram tomadas.' value={solucao} onChange={resposavelSolucao}/>
+
+            }
+            </>
             <button type='submit' className='salvar-btn'>Salvar</button>
           </form>
 
         </div>
 
       </div>
+
     </div>
   )
+  {
+    <Modal
+    responsavel={responsavel}
+    />
+  } 
 }
