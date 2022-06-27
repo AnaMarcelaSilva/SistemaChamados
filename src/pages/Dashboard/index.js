@@ -63,7 +63,10 @@ export default function Dashboard(){
           rm: doc.data().rm,
           status: doc.data().status,
           codigo: doc.data().codigo,
-          id: doc.id
+          id: doc.id,
+          solucao: doc.data().solucao,
+          responsavel: doc.data().responsavel,
+          dataFinal: doc.data().dataFinal
         })
       })
 
@@ -99,7 +102,6 @@ export default function Dashboard(){
   //Função para abrir/fechar modal através do seu valor(true or false)
   function search(item){
     setPostModal(!postModal);
-    console.log(postModal);
     setDetail(item); 
   }
 
@@ -139,9 +141,14 @@ export default function Dashboard(){
                   </thead>
                   <tbody>
                     {chamados.map((item, index)=>{
+                      
+                      const numId = item.id.slice(1, 15).replace(/[^0-9]/g, '');
+                      const id = parseInt(numId);
+                      const responsavel = item.responsavel;
+
                       return(
                         <tr key={index}>
-                        <td>{item.codigo}</td>
+                        <td>{id}</td>
                         <td className='requerente'>{item.requerente}</td>
                         <td className='email'>{item.email}</td>
                         <td >{item.assunto}</td>
@@ -171,6 +178,8 @@ export default function Dashboard(){
        <Modal
        item={detail}
         close={search}
+        responsavel={detail.responsavel}
+      
        />
      )}               
 
