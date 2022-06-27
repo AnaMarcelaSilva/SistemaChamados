@@ -30,6 +30,11 @@ function SignUp() {
     console.log(e.target.value);
   }
 
+  function toLimit(int = 0){
+    int.value = int.value.substring(5,10);
+}
+
+
   return (
     <div className="container-center">
       <div className="login">
@@ -40,17 +45,16 @@ function SignUp() {
         <form onSubmit={handleSubmit}>
           <h2>Cadastrar uma conta</h2>
           <input type="text" required placeholder="Seu nome" value={nome} onChange={(e) => setNome(e.target.value)} />
-          <input type='text' required placeholder='RM' value={rm} onChange={(e) => setRm(e.target.value)}/>
+          <input className='btn-rm' type='number' required placeholder='RM' value={rm} onChange={(e) => setRm(e.target.value)} min={5} maxLength={10} />
           <input type="text" required placeholder="email@email.com" value={email} onChange={ (e) => setEmail(e.target.value) }/>
 
           <select value={cargo} onChange={(e) => {setCargo(e.target.value);}}>
-              <option disabled selected>- Selecione seu cargo -</option>
                 <option value='Técnico'>Técnico</option>
                 <option value='Professor(a)' >Professor(a)</option>
                 <option value='Diretor(a)'>Diretor(a)</option>
                 <option value='Secretario(a)'>Secretario(a)</option>
             </select>
-          <input type="password" required placeholder="*******" value={password} onChange={(e) => setPassword(e.target.value) } />
+          <input type="password" required placeholder="*******" value={password} onChange={(e) => setPassword(e.target.value) }  minLength={5}/>
           <button type="submit">{loadinAuth ? 'Carregando...' : 'Acessar'}</button>
         </form>  
 

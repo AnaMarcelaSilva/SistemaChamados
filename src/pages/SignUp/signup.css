@@ -8,3 +8,8 @@ select {
   background-color: #fff;
   color: grays;
 }
+
+.btn-rm::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
