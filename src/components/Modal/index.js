@@ -1,7 +1,16 @@
 import './modal.css';
 import { FiX } from 'react-icons/fi'
+import { useEffect } from 'react';
 
-export default function Modal({item, close}){
+export default function Modal({item, close, responsavel}){
+
+  const numId = item.id.replace(/[^0-9]/g, '');
+  const id = parseInt(numId);
+
+  useEffect(()=>{
+    console.log(responsavel)
+  })
+
   return(
     <div className='modal'>
       <div className='container'>
@@ -11,7 +20,7 @@ export default function Modal({item, close}){
         </button>
 
       <div>
-        <h2>Detalher do chamado: <i>{item.id}</i></h2>
+        <h2>Detalhe do chamado: <i>{id}</i></h2>
 
         <div className='row'>
           <span>
@@ -40,6 +49,14 @@ export default function Modal({item, close}){
             <h3>Descrição</h3> 
             <p>{item.descricao}</p>
         </>
+        { item.solucao != '' &&
+        <div id='solucao'>
+           <h3 >Solução: </h3> 
+            <p>{item.solucao}</p>
+            <hr></hr>
+            <i>Por {item.responsavel}</i>
+        </div>
+        }
       </div>
     </div>
   </div>
