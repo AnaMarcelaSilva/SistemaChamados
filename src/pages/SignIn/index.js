@@ -1,4 +1,3 @@
-
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -24,7 +23,7 @@ function SignIn() {
     <div className="container-center">
     <div className="login">
       <div className="logo-area">
-        <h1>SIGOS</h1>
+        <h1>OfsSy</h1>
       </div>
 
         <form onSubmit={handleSubmit}>
